@@ -49,7 +49,7 @@
  */
  
 metadata {
-	definition (name: "WD100+ Dimmer", namespace: "darwinsden", author: "darwin@darwinsden.com") {
+	definition (name: "WD100+ Dimmer", namespace: "siivv", author: "darwin@darwinsden.com") {
 		capability "Switch Level"
 		capability "Actuator"
 		capability "Indicator"
