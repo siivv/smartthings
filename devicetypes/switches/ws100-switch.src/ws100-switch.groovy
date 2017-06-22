@@ -44,7 +44,7 @@
  */
  
 metadata {
-	definition (name: "WS100+ Switch", namespace: "darwinsden", author: "darwin@darwinsden.com") {
+	definition (name: "WS100+ Switch", namespace: "switches", author: "darwin@darwinsden.com") {
 		capability "Actuator"
 		capability "Indicator"
 		capability "Switch"
