@@ -22,6 +22,7 @@ definition (
     category: "Convenience")
 
 preferences {
+    page name: 'pageMain', title: 'Door Notify', install: true, uninstall: true, submitOnChange: true
     section("Monitor these locks:") {
         input "locks", "capability.lock", multiple: true, required: false
     }
@@ -154,6 +155,26 @@ def logMetric(json) {
     log.debug("source: ${evt.source}");
     log.debug("unit: ${evt.unit}");
 */
+
+/* main page */
+def pageMain() {
+  dynamicPage(name: 'pageMain', install: true, uninstall: true, submitOnChange: true) {
+    section('Create') {
+      app(name: 'locks', appName: 'Lock', namespace: 'ethayer', title: 'New Lock', multiple: true, image: 'https://dl.dropboxusercontent.com/u/54190708/LockManager/new-lock.png')
+      app(name: 'lockUsers', appName: 'Lock User', namespace: 'ethayer', title: 'New User', multiple: true, image: 'https://dl.dropboxusercontent.com/u/54190708/LockManager/user-plus.png')
+      app(name: 'keypads', appName: 'Keypad', namespace: 'ethayer', title: 'New Keypad', multiple: true, image: 'https://dl.dropboxusercontent.com/u/54190708/LockManager/keypad-plus.png')
+    }
+    section('Locks') {
+      def lockApps = getLockApps()
+      lockApps = lockApps.sort{ it.lock.id }
+      if (lockApps) {
+        def i = 0
+        lockApps.each { lockApp ->
+          i++
+          href(name: "toLockInfoPage${i}", page: 'lockInfoPage', params: [id: lockApp.lock.id], required: false, title: lockApp.label, image: 'https://dl.dropboxusercontent.com/u/54190708/LockManager/lock.png' )
+        }
+      }
+    }
 
 /* control which notifications & who gets them */
 /* TODO: how do we save these specific to a user? */
