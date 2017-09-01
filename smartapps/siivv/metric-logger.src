@@ -106,7 +106,7 @@ def initialize() {
 }
 
 def doSubscriptions() {
-    subscribe(devices, "contact", metricHandler);
+    subscribe(contacts, "contact", metricHandler);
     subscribe(indicators, "indicator", metricHandler);
     subscribe(modes, "locationMode", metricHandler);
     subscribe(motions, "motion", metricHandler);
