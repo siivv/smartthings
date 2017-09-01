@@ -14,7 +14,7 @@
  *
  */
 
-definition(
+definition (
     name: "door notify",
     namespace: "siivv",
     author: "siivv",
@@ -154,3 +154,25 @@ def logMetric(json) {
     log.debug("source: ${evt.source}");
     log.debug("unit: ${evt.unit}");
 */
+
+/* control which notifications & who gets them */
+/* TODO: how do we save these specific to a user? */
+def notifyPage() {
+  dynamicPage(name: 'notifyPage', title: 'notification settings') {
+    section {
+      paragraph 'these settings only apply to this installation and will not impact other smartthings app users'
+
+      input(name: 'pushnotify', type: 'bool', title: 'push notifications', description: 'push notification', required: true, submitOnChange: true)
+
+      if (phone != null || notification || recipients) {
+        input(name: 'notifyLocks', title: 'door locks', type: 'bool', required: true)
+        input(name: 'notifyGarages', title: 'for garage doors', type: 'bool', required: true)
+        input(name: 'notifyContacts', title: 'for contact sensors', type: 'bool', required: true)
+      }
+    }
+    section('notify timeperiod') {
+      input(name: 'notifyStartTime', title: 'start', type: 'time', required: false)
+      input(name: 'notifyStopTime', title: 'stop', type: 'time', required: false)
+    }
+  }
+}
